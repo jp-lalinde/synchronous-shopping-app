@@ -1,0 +1,56 @@
+<div class="main-margin">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Synchronous Shopping Problem Solver</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        A continuación se presenta un formulario sencillo, el cual se debe llenar de acuerdo a las siguientes
+        especificaciones para resolver el problema de HackerRank estipulado en este <a href="https://www.hackerrank.com/challenges/synchronous-shopping/problem">link</a>.
+      </p>
+      <ul>
+        <li class="mb-12">El campo Parameters debe contener tres numeros separados por comas SIN espacios (p. ej. 5,5,5). Estos representan el número nodos, 
+          arcos y peces respectivamente.</li>
+        <li class="mb-12">El campo Shopping Centers debe contener N arreglos de números, donde N es el número de nodos ingresado en Parameters. Los arreglos 
+          deben estar separados por dash (-), y los números separados por comas (p. ej. 1,1-1,2-1,3-1,4-1,5). Para cada arreglo, el primer número 
+          representa la cantidad de tipos de peces disponibles en el nodo, y los números siguientes representan los tipos de peces. </li>
+        <li class="mb-12">El campo Roads debe contener M arreglos de números, donde M es el número de arcos ingresados en Parameters. Los arreglos 
+            deben estar separados por dash (-), y los números separados por comas (p. ej. 1,2,10-1,3,10-2,4,10-3,5,10-4,5,10). Para cada arreglo, los números
+            representan el nodo origen, nodo destino y distancia entre los nodos respectivamente.  </li>
+      </ul>
+      <p>
+          No seguir las condiciones anteriores dará una respuesta no valida por parte del solver.
+      </p>
+      <form id="problemForm" name="problemForm" [formGroup]="problemForm" (ngSubmit)="submit()">
+        <div>
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Parameters</mat-label>
+            <input matInput formControlName="parameters">
+            <mat-error *ngIf="problemForm.get('parameters')?.errors?.required">Los parámetros son obligatorios.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Shopping Centers</mat-label>
+            <input matInput formControlName="shopping_centers">
+            <mat-error *ngIf="problemForm.get('shopping_centers')?.errors?.required">Los shopping centers son obligatorios.</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Roads</mat-label>
+            <input matInput formControlName="roads">
+            <mat-error *ngIf="problemForm.get('roads')?.errors?.required">Los arcos son obligatorios.</mat-error>
+          </mat-form-field>
+        </div>
+        <button mat-raised-button type="submit" color="accent" role="button" [disabled]="send_spinner">
+          <span *ngIf="!send_spinner" fxLayoutAlign="center center">
+            Resolver problema
+          </span>
+          <span *ngIf="send_spinner" fxLayoutAlign="center center">
+             Resolviendo
+          </span>
+        </button>
+      </form>
+      <div *ngIf="resultado" class="mt-12">
+        {{resultado}}
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
